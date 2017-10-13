@@ -8,16 +8,21 @@ class Counter extends Component {
         this.state = {
             count: this.props.count
         }
+
         this.onPlusClick = this.onPlusClick.bind(this);
         this.onMinusClick = this.onMinusClick.bind(this);
+
+        this.props.onCountUpdate(this.props.caption, this.state.count);
     }
 
     onPlusClick() {
         this.setState({count: this.state.count + 1});
+        this.props.onCountUpdate(this.props.caption, this.state.count + 1);
     }
 
     onMinusClick() {
         this.setState({count: this.state.count - 1});
+        this.props.onCountUpdate(this.props.caption, this.state.count - 1);
     }
 
     render() {
