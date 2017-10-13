@@ -6,7 +6,7 @@ class Counter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            count: this.props.count || 0
+            count: this.props.count
         }
         this.onPlusClick = this.onPlusClick.bind(this);
         this.onMinusClick = this.onMinusClick.bind(this);
@@ -34,6 +34,10 @@ class Counter extends Component {
 Counter.propTypes = {
     caption: PropTypes.string.isRequired,
     count: PropTypes.number
+};
+
+Counter.defaultProps = {
+    count: 10
 };
 
 export default Counter;

@@ -7,5 +7,5 @@ import Counter from './Counter';
 import registerServiceWorker from './registerServiceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<Counter caption="first" count={1} />, document.getElementById('root'));
+ReactDOM.render(<Counter caption="first" />, document.getElementById('root'));
 registerServiceWorker();
