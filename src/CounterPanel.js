@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Counter from './Counter';
+import CounterStore from './CounterStore';
 
 class CounterPanel extends Component {
 
     constructor(props) {
         super(props);
-        this.counters = {};
         this.state = {
             sum: 0
         };
@@ -13,20 +13,28 @@ class CounterPanel extends Component {
         this.onCountUpdate = this.onCountUpdate.bind(this);
     }
 
-    onCountUpdate(caption, val) {
-        this.counters[caption] = val;
+    onCountUpdate() {
+        let counters = CounterStore.getCounterValues();
         let sum = 0;
-        for (let key of Object.keys(this.counters)) {
-            sum += this.counters[key];
+        for (let key of Object.keys(counters)) {
+            sum += counters[key];
         }
         this.setState({sum: sum});
+    }
+
+    componentDidMount() {
+        CounterStore.addChangeListener(this.onCountUpdate);
+    }
+
+    componentWillUnmount() {
+        CounterStore.removeChangeListener(this.onCountUpdate);
     }
 
     render() {
         return (
             <div>
-                <Counter caption="first" onCountUpdate={this.onCountUpdate} />
-                <Counter caption="second" onCountUpdate={this.onCountUpdate} />
+                <Counter caption="first" />
+                <Counter caption="second" />
                 <hr/>
                 <p>Total: {this.state.sum}</p>
             </div>

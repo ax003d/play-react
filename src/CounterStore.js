@@ -14,6 +14,10 @@ const CounterSore = Object.assign({}, EventEmitter.prototype, {
         return counters[caption];
     },
 
+    getCounterValues() {
+        return counters;
+    },
+
     emitChange() {
         this.emit(CHANGE_EVENT);
     },
