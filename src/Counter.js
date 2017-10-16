@@ -1,39 +1,46 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CounterStore from './CounterStore';
 import * as Actions from './Actions';
+import store from './Store';
 
 class Counter extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            count: CounterStore.getCounterValue(props.caption)
-        }
+        this.getOwnState = this.getOwnState.bind(this);
+
+        store.dispatch(Actions.init(this.props.caption));
+        this.state = this.getOwnState();
 
         this.onPlusClick = this.onPlusClick.bind(this);
         this.onMinusClick = this.onMinusClick.bind(this);
         this.onChange = this.onChange.bind(this);
     }
 
+    getOwnState() {
+        return {
+            count: store.getState()[this.props.caption]
+        };
+    }
+
     onPlusClick() {
-        Actions.increment(this.props.caption);
+        store.dispatch(Actions.increment(this.props.caption));
     }
 
     onMinusClick() {
-        Actions.decrement(this.props.caption);
+        store.dispatch(Actions.decrement(this.props.caption));
     }
 
     onChange() {
-        this.setState({count: CounterStore.getCounterValue(this.props.caption)});
+        this.setState(this.getOwnState());
     }
 
     componentDidMount() {
-        CounterStore.addChangeListener(this.onChange);
+        store.subscribe(this.onChange);
     }
 
     componentWillUnmount() {
-        CounterStore.removeChangeListener(this.onChange);
+        store.unsubscribe(this.onChange);
     }
 
     render() {

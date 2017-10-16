@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Counter from './Counter';
-import CounterStore from './CounterStore';
+import store from './Store';
 
 class CounterPanel extends Component {
 
@@ -14,7 +14,7 @@ class CounterPanel extends Component {
     }
 
     onCountUpdate() {
-        let counters = CounterStore.getCounterValues();
+        let counters = store.getState();
         let sum = 0;
         for (let key of Object.keys(counters)) {
             sum += counters[key];
@@ -23,11 +23,11 @@ class CounterPanel extends Component {
     }
 
     componentDidMount() {
-        CounterStore.addChangeListener(this.onCountUpdate);
+        store.subscribe(this.onCountUpdate);
     }
 
     componentWillUnmount() {
-        CounterStore.removeChangeListener(this.onCountUpdate);
+        store.unsubscribe(this.onCountUpdate);
     }
 
     render() {

@@ -1,16 +1,22 @@
 import * as ActionTypes from './ActionTypes';
-import AppDispatcher from './AppDispatcher';
+
+export const init = (caption) => {
+    return {
+        type: ActionTypes.INIT,
+        caption: caption
+    };
+};
 
 export const increment = (caption) => {
-    AppDispatcher.dispatch({
+    return {
         type: ActionTypes.INCREMENT,
         caption: caption
-    });
+    };
 };
 
 export const decrement = (caption) => {
-    AppDispatcher.dispatch({
+    return {
         type: ActionTypes.DECREMENT,
         caption: caption
-    });
+    };
 };
