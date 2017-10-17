@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 import store from './Store';
-import Provider from './Provider';
-import CounterPanelContainer from './CounterPanelContainer';
+import {Provider} from 'react-redux';
+import CounterPanel from './CounterPanel';
 import registerServiceWorker from './registerServiceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(
     <Provider store={store}>
-        <CounterPanelContainer />
+        <CounterPanel />
     </Provider>, 
     document.getElementById('root'));
 registerServiceWorker();

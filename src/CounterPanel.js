@@ -1,15 +1,26 @@
 import React from 'react';
-import CounterContainer from './CounterContainer';
+import Counter from './Counter';
+import { connect } from 'react-redux';
 
 function CounterPanel({sum}) {
     return (
         <div>
-            <CounterContainer caption="first" />
-            <CounterContainer caption="second" />
+            <Counter caption="first" />
+            <Counter caption="second" />
             <hr />
             <p>Total: {sum}</p>
         </div>
     );
 }
 
-export default CounterPanel;
+function mapStateToProps(state) {
+    let sum = 0;
+    for (const key in state) {
+        sum += state[key];
+    }
+    return {
+        sum: sum
+    }
+}
+
+export default connect(mapStateToProps)(CounterPanel);
