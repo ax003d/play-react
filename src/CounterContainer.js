@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import * as Actions from './Actions';
-import store from './Store';
 import Counter from './Counter';
+import PropTypes from 'prop-types';
 
 class CounterContainer extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.getOwnState = this.getOwnState.bind(this);
 
-        store.dispatch(Actions.init(this.props.caption));
+        this.context.store.dispatch(Actions.init(this.props.caption));
         this.state = this.getOwnState();
 
         this.onPlusClick = this.onPlusClick.bind(this);
@@ -19,16 +19,16 @@ class CounterContainer extends Component {
 
     getOwnState() {
         return {
-            count: store.getState()[this.props.caption]
+            count: this.context.store.getState()[this.props.caption]
         };
     }
 
     onPlusClick() {
-        store.dispatch(Actions.increment(this.props.caption));
+        this.context.store.dispatch(Actions.increment(this.props.caption));
     }
 
     onMinusClick() {
-        store.dispatch(Actions.decrement(this.props.caption));
+        this.context.store.dispatch(Actions.decrement(this.props.caption));
     }
 
     onChange() {
@@ -36,11 +36,11 @@ class CounterContainer extends Component {
     }
 
     componentDidMount() {
-        store.subscribe(this.onChange);
+        this.context.store.subscribe(this.onChange);
     }
 
     componentWillUnmount() {
-        store.unsubscribe(this.onChange);
+        this.context.store.unsubscribe(this.onChange);
     }
 
     render() {
@@ -52,5 +52,9 @@ class CounterContainer extends Component {
         );
     }    
 }
+
+CounterContainer.contextTypes = {
+    store: PropTypes.object
+};
 
 export default CounterContainer;

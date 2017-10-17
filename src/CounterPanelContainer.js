@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import store from './Store';
 import CounterPanel from './CounterPanel';
+import PropTypes from 'prop-types';
 
 class CounterPanelContainer extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             sum: 0
         };
@@ -14,7 +14,7 @@ class CounterPanelContainer extends Component {
     }
 
     onCountUpdate() {
-        let counters = store.getState();
+        let counters = this.context.store.getState();
         let sum = 0;
         for (let key of Object.keys(counters)) {
             sum += counters[key];
@@ -23,11 +23,11 @@ class CounterPanelContainer extends Component {
     }
 
     componentDidMount() {
-        store.subscribe(this.onCountUpdate);
+        this.context.store.subscribe(this.onCountUpdate);
     }
 
     componentWillUnmount() {
-        store.unsubscribe(this.onCountUpdate);
+        this.context.store.unsubscribe(this.onCountUpdate);
     }
 
     render() {
@@ -36,5 +36,9 @@ class CounterPanelContainer extends Component {
         );
     }
 }
+
+CounterPanelContainer.contextTypes = {
+    store: PropTypes.object
+};
 
 export default CounterPanelContainer;
