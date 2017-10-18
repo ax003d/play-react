@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AddToDo from './addToDo';
+import ToDoItem from './ToDoItem';
 
 function ToDo ({ todos }) {
     return (
@@ -9,7 +10,11 @@ function ToDo ({ todos }) {
             <div>
                 <ul>
                 {
-                    todos.map((todo) => (<li>{ todo.text }</li>))
+                    todos.map((todo) => {
+                        return (
+                            <ToDoItem id={todo.id} text={todo.text} completed={todo.completed} />
+                        );
+                    })
                 }
                 </ul>
             </div>

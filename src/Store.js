@@ -6,8 +6,4 @@ const reducer = combineReducers({
     todo: toDoReduer
 });
 
-export default createStore(reducer, {'todo': [{
-    'id': 1,
-    'text': 'test',
-    'completed': false
-}]});
+export default createStore(reducer);

@@ -21,6 +21,7 @@ class AddToDo extends Component {
     onSubmit(event) {
         event.preventDefault();
         this.props.add(this.state.text);
+        this.setState({text: ''});
     }
 
     render() {
