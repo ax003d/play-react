@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import AddToDo from './addToDo';
 import ToDoItem from './ToDoItem';
@@ -13,7 +13,7 @@ function ToDo ({ todos }) {
                 {
                     todos.map((todo) => {
                         return (
-                            <ToDoItem id={todo.id} text={todo.text} completed={todo.completed} />
+                            <ToDoItem key={todo.id} id={todo.id} text={todo.text} completed={todo.completed} />
                         );
                     })
                 }
@@ -37,10 +37,6 @@ function mapStateToProps(state) {
           }
         })
     };
-}
-
-function mapDispatchToProps(dispatch) {
-
 }
 
 export default connect(mapStateToProps)(ToDo);

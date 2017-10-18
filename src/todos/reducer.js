@@ -9,7 +9,7 @@ export default (state = [], action) => {
                 "completed": action.completed
             }, ...state];
         case ActionTypes.REMOVE_TODO:
-            return state.filter(todo => todo.id != action.id );
+            return state.filter(todo => todo.id !== action.id );
         case ActionTypes.TOGGLE_TODE:
             return state.map(todo => {
                 if (todo.id === action.id) {

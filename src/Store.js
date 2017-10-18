@@ -1,4 +1,3 @@
-import React from 'react';
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { reducer as toDoReduer } from './todos';
 import { reducer as filterReducer } from './filter';
