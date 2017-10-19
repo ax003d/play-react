@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Weather extends Component {
     constructor(props) {
@@ -8,8 +9,8 @@ class Weather extends Component {
         }
     }
 
-    componentDidMount() {
-        const url = '/data/cityinfo/101010100.html';
+    componentDidUpdate() {
+        const url = `/data/cityinfo/${this.props.city}.html`;
         fetch(url).then((resp) => {
             console.log(resp);
             if (resp.status !== 200) {
@@ -42,4 +43,14 @@ class Weather extends Component {
     }
 }
 
-export default Weather;
+// function Weather ({ city }) {
+//     return <div>{city}</div>;
+// }
+
+function mapStateToProps(state) {
+    return {
+        city: state.city
+    }
+}
+
+export default connect(mapStateToProps)(Weather);
