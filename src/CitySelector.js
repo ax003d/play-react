@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { cityChanged } from './actions';
+import { cityChanged, fetchWeather } from './actions';
 
 function CitySelector ({ city, onChange }) {
     return (
@@ -23,6 +23,7 @@ function mapDispatchToProps(dispatch) {
     return {
         onChange(event) {
             dispatch(cityChanged(event.target.value));
+            dispatch(fetchWeather(event.target.value));
         }
     };
 }
